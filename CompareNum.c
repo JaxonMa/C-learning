@@ -19,5 +19,6 @@ int main() {
 
   char res = compare(num1, num2);
   printf("num1 %c num2", res);
-  
+
   return 0;
+}
