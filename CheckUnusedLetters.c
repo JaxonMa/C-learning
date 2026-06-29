@@ -57,21 +57,19 @@ void get_unused_letters(char* used_letters, char* unused_letters) {
 }
 
 int main() {
-  char test_text[] =
-      "He sat by the tree. The sun was hot, but the cold sea was near. He felt "
-      "glad to be there, away from all the loud city noise. He had a book in his "
-      "hand, but he just kept looking at the blue waves that one skips a bunch "
-      "of letters, so it's a good test for your alphabet-tracking logic. how's "
-      "that work for your code?";
-  size_t length = sizeof(test_text) / sizeof(test_text[0]);
+  char user_input[1000];
+  printf("Enter text to get unused letters: ");
+  fgets(user_input, sizeof(user_input), stdin);
+
+  size_t length = sizeof(user_input) / sizeof(user_input[0]);
   char used_letters[27] = {0};
   char unused_letters[27] = {0};
 
-  to_lower_string(test_text);
-  get_used_letters(test_text, used_letters);
-  printf("%s\n", used_letters);
-  get_unused_letters(test_text, unused_letters);
-  printf("%s\n", unused_letters);
+  to_lower_string(user_input);
+  get_used_letters(user_input, used_letters);
+  get_unused_letters(used_letters, unused_letters);
+  to_upper_string(unused_letters);
+  printf("These letters are not used in the text given:\n%s\n", unused_letters);
 
   return 0;
 }
