@@ -13,7 +13,7 @@ void print_array(int arr[], size_t len) {
 }
 
 // Actually, this function does not return an array, but it changes the value of an array declared
-// in main(). It could be regarded as a alternative to returning an array.
+// in main(). It could be regarded as an alternative to returning an array.
 
 int main() {
   int arr[3] = {1, 2, 3};
