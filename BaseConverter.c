@@ -23,15 +23,9 @@ char* dec_to_bin(int* dec) {
   for (int i = 1; i < num_columns; i++) {
     if (value_of_columns[i] > difference) {
       bin[i] = '0';
-
-    } else if (value_of_columns[i] < difference) {
-      bin[i] = '1';
-      difference -= value_of_columns[i] * 1;
-
     } else {
       bin[i] = '1';
-      memset(&bin[i+1], '0', num_columns - (i+1));
-      break;
+      difference -= value_of_columns[i] * 1;
     }
   }
 
