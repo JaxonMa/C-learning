@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <math.h>
 
 void clear_buffer() {
@@ -8,18 +7,26 @@ void clear_buffer() {
   while ((c = getchar()) != '\n' && c != EOF);
 }
 
-char* dec_to_bin(int* dec) {
+char* dec_to_bin(const int* dec) {
+  /*
+   * Converts a decimal number to its binary representation.
+   * Parameters:
+   *   dec: Pointer to the decimal number to be converted.
+   * Returns:
+   *   A dynamically allocated string containing the binary representation of the decimal number.
+   *   free() should be called on the returned string to avoid memory leaks.
+   */
   // The first column of the binary form is always 1
-  int num_columns = (int)log2(*dec) + 1;
+  const int num_columns = (int)log2(*dec) + 1;
   char* bin = (char*)malloc(num_columns * sizeof(char));
   bin[0] = '1';
 
-  int value_of_columns[num_columns];
+  double value_of_columns[num_columns];
   for (int i = 0; i < num_columns; i++) {
     value_of_columns[i] = pow(2.0, num_columns - i - 1);
   }
 
-  int difference = *dec - value_of_columns[0] * 1;
+  double difference = *dec - value_of_columns[0] * 1;
   for (int i = 1; i < num_columns; i++) {
     if (value_of_columns[i] > difference) {
       bin[i] = '0';
@@ -34,7 +41,7 @@ char* dec_to_bin(int* dec) {
 
 int bin_to_dec(char* bin) {
   int length = 0;
-  char* temp_bin = bin;
+  const char* temp_bin = bin;
 
   // Get how many columns there are in binary form
   while (*temp_bin) {
@@ -43,7 +50,7 @@ int bin_to_dec(char* bin) {
   }
   if (length == 0) return 0;
 
-  int columns[length];
+  double columns[length];
   for (int i = 0; i < length; i++) {
     columns[i] = pow(2.0, length - i - 1);
   }
@@ -62,7 +69,7 @@ int bin_to_dec(char* bin) {
 
 int main() {
   char option;
-  printf("Select mode:\n[1] Binary -> Decimal\n[2] Decimal -> Binary\n>>> ");
+  printf("Select mode:\n[1] Decimal -> Binary\n[2] Binary -> Decimal\n>>> ");
   scanf("%c", &option);
   // clear_buffer();
 
@@ -82,7 +89,7 @@ int main() {
       // bin to dec
       printf("Enter the number in binary: ");
       scanf("%s", bin_num);
-      int dec = bin_to_dec(bin_num);
+      const int dec = bin_to_dec(bin_num);
       printf("The decimal of %s is %d\n", bin_num, dec);
       break;
 
